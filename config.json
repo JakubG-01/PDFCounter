@@ -1,0 +1,7 @@
+{
+    "PIXEL_TO_MM": 0.3528,
+    "A4_WIDTH_MM": 210,
+    "A4_HEIGHT_MM": 297,
+    "PRICE_FOR_BW": 1.2,
+    "PRICE_FOR_COLOR": 2.3
+}
