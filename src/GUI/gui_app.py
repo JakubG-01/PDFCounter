@@ -19,7 +19,7 @@ class PDFCounterApp(tk.Tk):
 
         # Wgranie ikonki
         icon_path = os.path.join(os.path.dirname(
-            os.path.abspath(__file__)), 'pdfcounter.png')
+            os.path.abspath(__file__)), 'assets/pdfcounter.png')
         self.icon_img = PhotoImage(file=icon_path)
         self.iconphoto(True, self.icon_img)
 
