@@ -48,10 +48,7 @@ python main.py
 
 ### Example output
 
-<img width="1002" height="332" alt="image" src="https://github.com/user-attachments/assets/d0c9858a-d2fc-4ae4-85bb-c7a4c5a95481" />
-<img width="1002" height="332" alt="image" src="https://github.com/user-attachments/assets/18873bde-d41e-46aa-b6ab-684f2cfb00d7" />
-
-
+<img width="1002" height="332" alt="image" src="https://github.com/user-attachments/assets/11a8599f-033e-4bfe-b5a0-62da6ad14345" />
 
 ## Requirements
 - Python 3.8+
