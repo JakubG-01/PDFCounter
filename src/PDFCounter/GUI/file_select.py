@@ -1,3 +1,4 @@
+from pydoc import text
 from tkinter import ttk
 from tkinter import filedialog
 
@@ -16,10 +17,13 @@ class FileSelect(ttk.Frame):
 
     def create_widgets(self):
         button = ttk.Button(self, text="Browse")
+        self.chosen_directory = ttk.Label(
+            self, text=f"Folder was not selected")
+        self.chosen_directory.pack(side="right")
         button.pack(side="left")
         button.config(command=self.chooseDirectory)
 
     def chooseDirectory(self):
         self.selected_folder = filedialog.askdirectory()
-        self.chosen_directory = ttk.Label(self, text=f"Selected folder: {self.selected_folder}").pack(
-            side="right")
+        self.chosen_directory.config(
+            text=f"Selected folder: {self.selected_folder}")
