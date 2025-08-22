@@ -17,8 +17,8 @@ class PDFBatchAnalyzer:
     def analyze_all(self):
         self.result = ""
         for filename in os.listdir(self.folder_path):
-            if filename.lower().endswith(".pdf"):
-                filepath = os.path.join(self.folder_path, filename)
+            filepath = os.path.join(self.folder_path, filename)
+            if os.path.isfile(filepath) and filename.lower().endswith(".pdf"):
                 file_analyzer = PDFFileAnalyzer(
                     filepath=filepath,
                     price_bw=self.price_bw,
