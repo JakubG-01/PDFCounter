@@ -30,11 +30,6 @@ class PDFFileAnalyzer:
                 is_color = analyzer.is_color()
                 is_blank = analyzer.is_white_or_empty()
 
-                # if is_blank:
-                #     # print(f"  Strona {page_number} jest pusta")
-                #     # print()
-                #     pass
-
                 if not is_blank:
 
                     page_cost = format_ratio * \
@@ -47,28 +42,14 @@ class PDFFileAnalyzer:
                     self.cost += page_cost
                     file_cost += page_cost
 
-                    # print(f"  Strona {page_number}")
-                    # print(
-                    #     f"    Format: {analyzer.width_mm}x{analyzer.height_mm} mm")
-                    # print(f"    Ilosc formatek A4: {format_ratio:.2f}")
-                    # print(
-                    #     f"    Typ: {'Kolorowa' if is_color else 'Czarno-biała'}")
-                    # print(f"    Koszt: {page_cost:.2f} zł")
-                    # print()
-
             t1 = time.perf_counter()
             time_of_operation = t1 - t0
             self.output_lines.append(
                 f"Price of printing: {self.filename} is equal {round(file_cost, 2)} PLN \n⌛ Time of operation: {time_of_operation}")
 
-            # print(
-            #     f"    Cena wydruku pliku {self.filename} wynosi {round(file_cost, 2)} zł")
-            # print(f"  ⌛ Czas operacji: {time_of_operation}")
-
         except Exception as e:
             self.output_lines.append(
                 f"  ❌ Error in file: {self.filename}: {e}")
-            # print(f"  ❌ Błąd w pliku {self.filename}: {e}")
 
         return "\n".join(self.output_lines)
 
