@@ -5,6 +5,8 @@ from .file_select import FileSelect
 from .output_frame import FileAnalyticsOutput
 from .start_analyzing import StartAnalyzing
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 class PDFCounterApp(tk.Tk):
     def __init__(self, config):
@@ -12,14 +14,13 @@ class PDFCounterApp(tk.Tk):
         self.config_data = config
 
         # Tytuł i rozmiar okna
+        icon_path = os.path.join(BASE_DIR, "assets", "pdfcounter.png")
         self.title("PDFCounter")
         self.geometry("1000x300")
         self.minsize(width=800, height=250)
         self.selected_folder = None
 
         # Wgranie ikonki
-        icon_path = os.path.join(os.path.dirname(
-            os.path.abspath(__file__)), 'assets/pdfcounter.png')
         self.icon_img = PhotoImage(file=icon_path)
         self.iconphoto(True, self.icon_img)
 
