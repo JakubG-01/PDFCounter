@@ -25,5 +25,8 @@ class FileSelect(ttk.Frame):
 
     def chooseDirectory(self):
         self.selected_folder = filedialog.askdirectory()
-        self.chosen_directory.config(
-            text=f"Selected folder: {self.selected_folder}")
+        if self.selected_folder == "":
+            self.chosen_directory.config(text=f"Folder was not selected")
+        else:
+            self.chosen_directory.config(
+                text=f"Selected folder: {self.selected_folder}")
