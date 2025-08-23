@@ -1,3 +1,4 @@
+import tkinter as tk
 from tkinter import ttk
 from analyzers import PDFBatchAnalyzer
 
@@ -23,6 +24,7 @@ class StartAnalyzing(ttk.Frame):
         analyze_button.pack(side="left")
 
     def changeProgress(self):
+        self.output_frame.results_box.config(state=tk.NORMAL)
         self.output_frame.results_box.delete("1.0", "end")
         self.progress_bar['value'] += 5
         self.analyzer = PDFBatchAnalyzer(folder_path=self.file_select_frame.selected_folder,
@@ -34,4 +36,4 @@ class StartAnalyzing(ttk.Frame):
                                          )
         result = self.analyzer.analyze_all()
         self.output_frame.results_box.insert("end", result)
-        # print(self.analyzer.folder_path)
+        self.output_frame.results_box.config(state=tk.DISABLED)
