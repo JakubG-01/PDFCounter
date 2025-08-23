@@ -31,7 +31,7 @@ class PDFBatchAnalyzer:
                 self.total_bw += bw
                 self.total_color += color
                 self.total_cost += cost
-            self.result += "\n"
+                self.result += "\n"
 
         return self.print_summary()
 
