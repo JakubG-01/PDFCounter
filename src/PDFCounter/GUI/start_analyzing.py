@@ -26,7 +26,7 @@ class StartAnalyzing(ttk.Frame):
     def changeProgress(self):
         self.output_frame.results_box.config(state=tk.NORMAL)
         self.output_frame.results_box.delete("1.0", "end")
-        self.progress_bar['value'] += 5
+        self.progress_bar['value'] = 100
         self.analyzer = PDFBatchAnalyzer(folder_path=self.file_select_frame.selected_folder,
                                          price_bw=self.config_data["PRICE_FOR_BW"],
                                          price_color=self.config_data["PRICE_FOR_COLOR"],
