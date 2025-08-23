@@ -1,4 +1,3 @@
-from pydoc import text
 from tkinter import ttk
 from tkinter import filedialog
 
