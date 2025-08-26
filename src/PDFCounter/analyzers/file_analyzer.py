@@ -14,6 +14,7 @@ class PDFFileAnalyzer:
         self.a4_format = a4_format
         self.pages_bw = 0
         self.pages_color = 0
+        self.pages_blank = 0
         self.cost = 0.0
         self.output_lines = []
 
@@ -42,6 +43,9 @@ class PDFFileAnalyzer:
                     self.cost += page_cost
                     file_cost += page_cost
 
+                else:
+                    self.pages_blank += 1
+
             t1 = time.perf_counter()
             time_of_operation = t1 - t0
             self.output_lines.append(
@@ -54,4 +58,4 @@ class PDFFileAnalyzer:
         return "\n".join(self.output_lines)
 
     def get_summary(self):
-        return self.pages_bw, self.pages_color, round(self.cost, 2)
+        return self.pages_bw, self.pages_color, round(self.cost, 2), self.pages_blank

@@ -12,6 +12,7 @@ class PDFBatchAnalyzer:
         self.a4_format = a4_format
         self.total_bw = 0
         self.total_color = 0
+        self.total_blank = 0
         self.total_cost = 0.0
 
     def analyze_all(self):
@@ -27,15 +28,16 @@ class PDFBatchAnalyzer:
                     a4_format=self.a4_format
                 )
                 self.result += file_analyzer.analyze() + "\n"
-                bw, color, cost = file_analyzer.get_summary()
+                bw, color, cost, blank = file_analyzer.get_summary()
                 self.total_bw += bw
                 self.total_color += color
                 self.total_cost += cost
+                self.total_blank += blank
                 self.result += "\n"
 
         return self.print_summary()
 
     def print_summary(self):
         summary_text = self.result + \
-            f"📊 SUMMARY: \nBW PAGES: {self.total_bw} \nCOLOR PAGES: {self.total_color} \nTOTAL COST: {round(self.total_cost, 2)} PLN"
+            f"📊 SUMMARY: \nBW PAGES: {self.total_bw} \nCOLOR PAGES: {self.total_color} \nBLANK PAGES: {self.total_blank} \nTOTAL COST: {round(self.total_cost, 2)} PLN"
         return summary_text
