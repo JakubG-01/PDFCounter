@@ -1,4 +1,5 @@
 import tkinter as tk
+import os
 from tkinter import messagebox
 from tkinter import ttk
 from analyzers import PDFBatchAnalyzer
@@ -25,14 +26,16 @@ class StartAnalyzing(ttk.Frame):
         analyze_button.pack(side="left")
 
     def changeProgress(self):
-        self.progress_bar['value'] = 0
         self.output_frame.results_box.config(state=tk.NORMAL)
         self.output_frame.results_box.delete("1.0", "end")
         if self.file_select_frame.selected_folder == "":
             messagebox.showwarning(
                 "Warning", "Please select a folder before proceeding")
         else:
-            self.progress_bar['value'] = 100
+            amount_of_files = len(
+                [f for f in os.listdir(self.file_select_frame.selected_folder) if f.lower().endswith(".pdf")])
+            progress_step = 100 / amount_of_files
+            self.progress_bar['value'] += progress_step
             self.analyzer = PDFBatchAnalyzer(folder_path=self.file_select_frame.selected_folder,
                                              price_bw=self.config_data["PRICE_FOR_BW"],
                                              price_color=self.config_data["PRICE_FOR_COLOR"],
