@@ -26,6 +26,7 @@ class StartAnalyzing(ttk.Frame):
         analyze_button.pack(side="left")
 
     def changeProgress(self):
+        self.progress_bar['value'] = 0
         self.output_frame.results_box.config(state=tk.NORMAL)
         self.output_frame.results_box.delete("1.0", "end")
         if self.file_select_frame.selected_folder == "":
