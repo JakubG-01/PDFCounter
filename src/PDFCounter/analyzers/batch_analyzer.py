@@ -54,5 +54,5 @@ class PDFBatchAnalyzer:
             f"  BW PAGES: {self.total_bw}\n"
             f"  COLOR PAGES: {self.total_color}\n"
             f"  BLANK PAGES: {self.total_blank}\n"
-            f"  TOTAL COST: {round(self.total_cost, 2)} zł\n"
+            f"  TOTAL COST: {round(self.total_cost, 2)} zł"
         )
