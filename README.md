@@ -19,7 +19,7 @@ PDFCounter is a lightweight tool for analyzing PDF files to count A4 page format
 
 - Provide a detailed summary per file and overall totals
 
-- GUI with file selection (working progress bar soon)
+- GUI with file selection
 
 ## Configuration ⚙️
 
