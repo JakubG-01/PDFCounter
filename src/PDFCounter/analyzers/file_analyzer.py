@@ -49,7 +49,7 @@ class PDFFileAnalyzer:
             t1 = time.perf_counter()
             time_of_operation = t1 - t0
             self.output_lines.append(
-                f"Price of printing: {self.filename} is equal {round(file_cost, 2)} PLN \n⌛ Time of operation: {time_of_operation}")
+                f"Price of printing: {self.filename} is equal {round(file_cost, 2)} PLN \n⌛ Time of operation: {time_of_operation}\n")
 
         except Exception as e:
             self.output_lines.append(
