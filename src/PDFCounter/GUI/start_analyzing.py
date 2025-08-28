@@ -42,4 +42,6 @@ class StartAnalyzing(ttk.Frame):
                                              )
             result = self.analyzer.analyze_all()
             self.output_frame.results_box.insert("end", result)
+            messagebox.showinfo(
+                "Analyzis completed", "Analyzis of selected files has been completed successfully")
         self.output_frame.results_box.config(state=tk.DISABLED)
