@@ -20,7 +20,6 @@ class PDFFileAnalyzer:
 
     def analyze(self):
         self.output_lines.append(f"🔍 Analyzing file: {self.filename}")
-        t0 = time.perf_counter()
         try:
             doc = fitz.open(self.filepath)
             file_cost = 0.0
@@ -46,10 +45,8 @@ class PDFFileAnalyzer:
                 else:
                     self.pages_blank += 1
 
-            t1 = time.perf_counter()
-            time_of_operation = t1 - t0
             self.output_lines.append(
-                f"Price of printing: {self.filename} is equal {round(file_cost, 2)} PLN \n⌛ Time of operation: {time_of_operation}\n")
+                f"Price of printing: {self.filename} is equal {round(file_cost, 2)} PLN \n")
 
         except Exception as e:
             self.output_lines.append(
