@@ -16,7 +16,7 @@ class PDFCounterApp(tk.Tk):
         # Tytuł i rozmiar okna
         icon_path = os.path.join(BASE_DIR, "assets", "pdfcounter.png")
         self.title("PDFCounter")
-        self.geometry("1000x300")
+        self.geometry("600x300")
         self.minsize(width=800, height=250)
         self.selected_folder = None
 
