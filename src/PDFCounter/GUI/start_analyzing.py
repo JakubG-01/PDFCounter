@@ -60,7 +60,7 @@ class StartAnalyzing(ttk.Frame):
 
         for result in self.analyzer.analyze_all():
             if isinstance(result, tuple):
-                filename, msg, bw, color, blank, cost = result
+                msg = result
                 self.output_frame.results_box.insert("end", msg + "\n")
             else:
                 self.output_frame.results_box.insert("end", result + "\n")

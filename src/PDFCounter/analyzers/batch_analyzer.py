@@ -44,7 +44,7 @@ class PDFBatchAnalyzer:
                 self.total_blank += blank
                 self.total_cost += cost
 
-                yield (filename, msg, bw, color, blank, cost)
+                yield (msg)
 
         yield self.print_summary()
 
