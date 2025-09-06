@@ -57,10 +57,23 @@ class StartAnalyzing(ttk.Frame):
         )
 
         for filename, bw, color, blank, cost in self.analyzer.analyze_all():
-            self.output_frame.results_box.insert("", "end",
-                                                 values=(filename, bw, color, blank, f"{cost:.2f}"))
-            self.progress_bar['value'] += progress_step
-            self.update_idletasks()
+            if filename == "TOTAL":
+                self.output_frame.results_box.insert(
+                    "", "end",
+                    values=("TOTAL", self.analyzer.total_bw, self.analyzer.total_color,
+                            self.analyzer.total_blank, f"{self.analyzer.total_cost:.2f}"),
+                    tags=("total",)
+                )
+                self.update_idletasks()
+            else:
+                self.output_frame.results_box.insert("", "end",
+                                                     values=(filename, bw, color, blank, f"{cost:.2f}"))
+                self.progress_bar['value'] += progress_step
+                self.update_idletasks()
+
+        self.output_frame.results_box.tag_configure(
+            "total", background="#e0e0e0", font=("TkDefaultFont", 10, "bold"))
+
         messagebox.showinfo(
             "Analysis completed", "Analysis of selected files has been completed successfully"
         )
