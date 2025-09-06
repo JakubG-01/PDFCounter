@@ -56,13 +56,9 @@ class StartAnalyzing(ttk.Frame):
             self.config_data["A4_HEIGHT_MM"]
         )
 
-        for result in self.analyzer.analyze_all():
-            if isinstance(result, tuple):
-                msg = result
-                self.output_frame.results_box.insert("", "end", msg)
-            else:
-                self.output_frame.results_box.insert("", "end", result)
-
+        for filename, bw, color, blank, cost in self.analyzer.analyze_all():
+            self.output_frame.results_box.insert("", "end",
+                                                 values=(filename, bw, color, blank, f"{cost:.2f}"))
             self.progress_bar['value'] += progress_step
             self.update_idletasks()
         messagebox.showinfo(
