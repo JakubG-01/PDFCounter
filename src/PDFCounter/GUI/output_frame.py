@@ -26,3 +26,10 @@ class FileAnalyticsOutput(ttk.Frame):
         self.results_box.column("color", width=100, anchor="center")
         self.results_box.column("blank", width=100, anchor="center")
         self.results_box.column("cost", width=100, anchor="center")
+
+        y_scroll = ttk.Scrollbar(
+            self, orient="vertical", command=self.results_box.yview)
+        x_scroll = ttk.Scrollbar(
+            self, orient="horizontal", command=self.results_box.xview)
+        self.results_box.configure(
+            yscrollcommand=y_scroll.set, xscrollcommand=x_scroll.set)
