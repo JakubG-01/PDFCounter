@@ -22,12 +22,12 @@ class FileAnalyticsOutput(ttk.Frame):
         self.results_box.heading("cost", text="Cost (zł)")
         self.results_box.heading("status", text="Status")
 
-        self.results_box.column("filename", width=100, anchor="center")
-        self.results_box.column("bw", width=100, anchor="center")
-        self.results_box.column("color", width=100, anchor="center")
-        self.results_box.column("blank", width=100, anchor="center")
-        self.results_box.column("cost", width=100, anchor="center")
-        self.results_box.column("status", width=100, anchor="center")
+        self.results_box.column("filename", width=150, anchor="center")
+        self.results_box.column("bw", width=30, anchor="center")
+        self.results_box.column("color", width=30, anchor="center")
+        self.results_box.column("blank", width=30, anchor="center")
+        self.results_box.column("cost", width=30, anchor="center")
+        self.results_box.column("status", width=20, anchor="center")
 
         y_scroll = ttk.Scrollbar(
             self, orient="vertical", command=self.results_box.yview)
@@ -42,3 +42,7 @@ class FileAnalyticsOutput(ttk.Frame):
 
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
+
+        style = ttk.Style(self.results_box)
+        style.configure("Treeview.Heading", foreground="black",
+                        font=("TkDefaultFont", 10, "bold"))
