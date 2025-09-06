@@ -23,7 +23,7 @@ class PDFPageAnalyzer:
 
     def is_white_or_empty(self, tolerance=2):
         if not self.page.get_text().strip() and not self.page.get_images() and not self.page.get_drawings():
-            return True  # brak tekstu, obrazów i rysunków – raczej pusta
+            return True
 
         pix = self.page.get_pixmap()
         img = Image.open(io.BytesIO(pix.tobytes("ppm"))).convert("RGB")
