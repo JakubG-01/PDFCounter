@@ -15,8 +15,8 @@ class PDFCounterApp(tk.Tk):
 
         icon_path = os.path.join(BASE_DIR, "assets", "pdfcounter.png")
         self.title("PDFCounter")
-        self.geometry("600x400")
-        self.minsize(width=600, height=400)
+        self.geometry("800x400")
+        self.minsize(width=800, height=400)
         self.selected_folder = None
 
         self.icon_img = PhotoImage(file=icon_path)
