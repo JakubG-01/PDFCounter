@@ -15,7 +15,6 @@ class PDFFileAnalyzer:
         self.pages_color = 0
         self.pages_blank = 0
         self.cost = 0.0
-        self.output_lines = []
 
     def analyze(self):
         try:
