@@ -15,3 +15,14 @@ class FileAnalyticsOutput(ttk.Frame):
             height=8
         )
         self.results_box.pack(fill="both", expand=True)
+        self.results_box.heading("filename", text="File Name")
+        self.results_box.heading("bw", text="B/W Pages")
+        self.results_box.heading("color", text="Color Pages")
+        self.results_box.heading("blank", text="Blank Pages")
+        self.results_box.heading("cost", text="Cost (zł)")
+
+        self.results_box.column("filename", width=100, anchor="center")
+        self.results_box.column("bw", width=100, anchor="center")
+        self.results_box.column("color", width=100, anchor="center")
+        self.results_box.column("blank", width=100, anchor="center")
+        self.results_box.column("cost", width=100, anchor="center")
