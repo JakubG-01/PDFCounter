@@ -9,7 +9,7 @@ config_path = os.path.join(BASE_DIR, "config", "config.json")
 with open(config_path, "r") as f:
     config = json.load(f)
 
-A4_FORMAT = config["A4_WIDTH_MM"] * config["A4_HEIGHT_MM"]
+A4_FORMAT = 62370
 
 if __name__ == "__main__":
     app = PDFCounterApp(config)
