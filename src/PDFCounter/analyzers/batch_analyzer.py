@@ -23,10 +23,13 @@ class PDFBatchAnalyzer:
             pixel_to_mm=self.pixel_to_mm,
             a4_format=self.a4_format
         )
-        msg = file_analyzer.analyze()
+        ok_msg, error_msg = file_analyzer.analyze()
         bw, color, cost, blank = file_analyzer.get_summary()
 
-        return msg, bw, color, blank, cost
+        if ok_msg:
+            return filepath.split("/")[-1], bw, color, blank, cost, "OK"
+        else:
+            return filepath.split("/")[-1], None, None, None, None, f"Error: {error_msg}"
 
     def analyze_all(self):
         self.total_bw = 0
@@ -38,12 +41,18 @@ class PDFBatchAnalyzer:
             filepath = os.path.join(self.folder_path, filename)
 
             if os.path.isfile(filepath) and filename.lower().endswith(".pdf"):
-                msg, bw, color, blank, cost = self.analyze_file(filepath)
-                self.total_bw += bw
-                self.total_color += color
-                self.total_blank += blank
-                self.total_cost += cost
+                filename, bw, color, blank, cost, status = self.analyze_file(
+                    filepath)
+                if status == "OK":
+                    if bw is not None:
+                        self.total_bw += bw
+                    if color is not None:
+                        self.total_color += color
+                    if blank is not None:
+                        self.total_blank += blank
+                    if cost is not None:
+                        self.total_cost += cost
 
-                yield (filename, bw, color, blank, cost)
+                yield (filename, bw, color, blank, cost, status)
 
-        yield ("TOTAL", self.total_bw, self.total_color, self.total_blank, self.total_cost)
+        yield ("TOTAL", self.total_bw, self.total_color, self.total_blank, self.total_cost, "COMPLETED")
