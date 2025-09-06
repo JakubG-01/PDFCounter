@@ -33,3 +33,10 @@ class FileAnalyticsOutput(ttk.Frame):
             self, orient="horizontal", command=self.results_box.xview)
         self.results_box.configure(
             yscrollcommand=y_scroll.set, xscrollcommand=x_scroll.set)
+
+        self.results_box.grid(row=0, column=0, sticky="nsew")
+        y_scroll.grid(row=0, column=1, sticky="ns")
+        x_scroll.grid(row=1, column=0, sticky="ew")
+
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=1)
