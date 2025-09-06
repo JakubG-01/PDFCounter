@@ -45,3 +45,5 @@ class PDFBatchAnalyzer:
                 self.total_cost += cost
 
                 yield (filename, bw, color, blank, cost)
+
+        yield ("TOTAL", self.total_bw, self.total_color, self.total_blank, self.total_cost)
