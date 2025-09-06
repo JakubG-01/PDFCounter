@@ -18,7 +18,6 @@ class PDFFileAnalyzer:
         self.output_lines = []
 
     def analyze(self):
-        self.output_lines.append(f"🔍 Analyzing file: {self.filename}")
         try:
             doc = fitz.open(self.filepath)
             file_cost = 0.0
@@ -44,14 +43,10 @@ class PDFFileAnalyzer:
                 else:
                     self.pages_blank += 1
 
-            self.output_lines.append(
-                f"Price of printing: {self.filename} is equal {round(file_cost, 2)} PLN \n")
+            return True, None
 
         except Exception as e:
-            self.output_lines.append(
-                f"  ❌ Error in file: {self.filename}: {e}")
-
-        return "\n".join(self.output_lines)
+            return False, str(e)
 
     def get_summary(self):
         return self.pages_bw, self.pages_color, round(self.cost, 2), self.pages_blank
