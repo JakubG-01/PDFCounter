@@ -16,8 +16,8 @@ class PDFCounterApp(tk.Tk):
         # Tytuł i rozmiar okna
         icon_path = os.path.join(BASE_DIR, "assets", "pdfcounter.png")
         self.title("PDFCounter")
-        self.geometry("600x300")
-        self.minsize(width=800, height=250)
+        self.geometry("600x400")
+        self.minsize(width=600, height=400)
         self.selected_folder = None
 
         # Wgranie ikonki
