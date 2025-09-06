@@ -28,8 +28,8 @@ class StartAnalyzing(ttk.Frame):
 
     def changeProgress(self):
         self.progress_bar['value'] = 0
-        self.output_frame.results_box.config(state=tk.NORMAL)
-        self.output_frame.results_box.delete("1.0", "end")
+        for item in self.output_frame.results_box.get_children():
+            self.output_frame.results_box.delete(item)
 
         folder = self.file_select_frame.selected_folder
         if not folder:
