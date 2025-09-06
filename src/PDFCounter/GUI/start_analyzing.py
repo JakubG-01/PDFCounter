@@ -26,6 +26,7 @@ class StartAnalyzing(ttk.Frame):
         analyze_button.pack(side="left")
 
     def changeProgress(self):
+        row_count = 0
         self.progress_bar['value'] = 0
         for item in self.output_frame.results_box.get_children():
             self.output_frame.results_box.delete(item)
@@ -72,14 +73,21 @@ class StartAnalyzing(ttk.Frame):
                 )
 
             else:
+                row_tag = "even" if row_count % 2 == 0 else "odd"
                 self.output_frame.results_box.insert("", "end",
-                                                     values=(filename, bw, color, blank, f"{cost:.2f}", status))
+                                                     values=(
+                                                         filename, bw, color, blank, f"{cost:.2f}", status),
+                                                     tags=(row_tag,))
                 self.progress_bar['value'] += progress_step
+                self.output_frame.results_box.tag_configure(
+                    "odd", background="white")
+                self.output_frame.results_box.tag_configure(
+                    "even", background="#cce6ff")
                 self.update_idletasks()
+                row_count += 1
 
         self.output_frame.results_box.tag_configure(
             "total", background="#e0e0e0", font=("TkDefaultFont", 10, "bold"))
-
         self.output_frame.results_box.tag_configure(
             "error", foreground="red"
         )
