@@ -1,8 +1,4 @@
 from tkinter import ttk
-from tkinter import scrolledtext
-
-
-# Pole tekstowe jako output - wyświetlenie wyników
 
 
 class FileAnalyticsOutput(ttk.Frame):
@@ -13,5 +9,9 @@ class FileAnalyticsOutput(ttk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        self.results_box = scrolledtext.ScrolledText(self, height=8)
+        self.results_box = ttk.Treeview(self, columns=(
+            "filename", "bw", "color", "blank", "cost"),
+            show="headings",
+            height=8
+        )
         self.results_box.pack(fill="both", expand=True)
