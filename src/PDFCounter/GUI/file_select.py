@@ -1,8 +1,6 @@
 from tkinter import ttk
 from tkinter import filedialog
 
-# Label + przycisk "Wybierz folder:" - wybranie i wyświetlenie danej scieżki
-
 
 class FileSelect(ttk.Frame):
     def __init__(self, parent):

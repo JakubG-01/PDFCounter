@@ -22,11 +22,9 @@ class PDFPageAnalyzer:
         return gray.tobytes() != original.tobytes()
 
     def is_white_or_empty(self, tolerance=2):
-        # Szybki test zawartości
         if not self.page.get_text().strip() and not self.page.get_images() and not self.page.get_drawings():
             return True  # brak tekstu, obrazów i rysunków – raczej pusta
 
-        # Analiza pikseli
         pix = self.page.get_pixmap()
         img = Image.open(io.BytesIO(pix.tobytes("ppm"))).convert("RGB")
 
