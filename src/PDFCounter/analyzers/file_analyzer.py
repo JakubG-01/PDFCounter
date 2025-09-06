@@ -1,6 +1,5 @@
 import fitz
 from .page_analyzer import PDFPageAnalyzer
-import time
 
 
 class PDFFileAnalyzer:
