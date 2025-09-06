@@ -10,7 +10,7 @@ class FileAnalyticsOutput(ttk.Frame):
 
     def create_widgets(self):
         self.results_box = ttk.Treeview(self, columns=(
-            "filename", "bw", "color", "blank", "cost"),
+            "filename", "bw", "color", "blank", "cost", "status"),
             show="headings",
             height=8
         )
@@ -20,12 +20,14 @@ class FileAnalyticsOutput(ttk.Frame):
         self.results_box.heading("color", text="Color Pages")
         self.results_box.heading("blank", text="Blank Pages")
         self.results_box.heading("cost", text="Cost (zł)")
+        self.results_box.heading("status", text="Status")
 
         self.results_box.column("filename", width=100, anchor="center")
         self.results_box.column("bw", width=100, anchor="center")
         self.results_box.column("color", width=100, anchor="center")
         self.results_box.column("blank", width=100, anchor="center")
         self.results_box.column("cost", width=100, anchor="center")
+        self.results_box.column("status", width=100, anchor="center")
 
         y_scroll = ttk.Scrollbar(
             self, orient="vertical", command=self.results_box.yview)
