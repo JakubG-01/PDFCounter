@@ -13,18 +13,15 @@ class PDFCounterApp(tk.Tk):
         super().__init__()
         self.config_data = config
 
-        # Tytuł i rozmiar okna
         icon_path = os.path.join(BASE_DIR, "assets", "pdfcounter.png")
         self.title("PDFCounter")
         self.geometry("600x400")
         self.minsize(width=600, height=400)
         self.selected_folder = None
 
-        # Wgranie ikonki
         self.icon_img = PhotoImage(file=icon_path)
         self.iconphoto(True, self.icon_img)
 
-        # Inicjalizacja frame'ów
         self.file_select_frame = FileSelect(self)
         self.output_frame = FileAnalyticsOutput(self)
         StartAnalyzing(self, self.output_frame,
