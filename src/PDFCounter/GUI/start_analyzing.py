@@ -35,7 +35,6 @@ class StartAnalyzing(ttk.Frame):
         if not folder:
             messagebox.showwarning(
                 "Warning", "Please select a folder before proceeding")
-            self.output_frame.results_box.config(state=tk.DISABLED)
             return
 
         pdf_files = [f for f in os.listdir(
@@ -44,7 +43,6 @@ class StartAnalyzing(ttk.Frame):
         if amount_of_files == 0:
             messagebox.showwarning(
                 "Warning", "No PDF files found in this folder")
-            self.output_frame.results_box.config(state=tk.DISABLED)
             return
 
         progress_step = 100 / amount_of_files
@@ -61,13 +59,12 @@ class StartAnalyzing(ttk.Frame):
         for result in self.analyzer.analyze_all():
             if isinstance(result, tuple):
                 msg = result
-                self.output_frame.results_box.insert("end", msg + "\n")
+                self.output_frame.results_box.insert("", "end", msg)
             else:
-                self.output_frame.results_box.insert("end", result + "\n")
+                self.output_frame.results_box.insert("", "end", result)
 
             self.progress_bar['value'] += progress_step
             self.update_idletasks()
-        self.output_frame.results_box.config(state=tk.DISABLED)
         messagebox.showinfo(
             "Analysis completed", "Analysis of selected files has been completed successfully"
         )
