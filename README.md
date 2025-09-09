@@ -23,13 +23,10 @@ PDFCounter is a lightweight tool for analyzing PDF files to count A4 page format
 
 ## Configuration ⚙️
 
-Configuration values such as prices, A4 format dimensions are stored in *config.json*:
+Configuration values such as prices are stored in *config.json*:
 
 ```json
 {
-  "PIXEL_TO_MM": 0.3528,
-  "A4_WIDTH_MM": 210,
-  "A4_HEIGHT_MM": 297,
   "PRICE_FOR_BW": 1.2,
   "PRICE_FOR_COLOR": 2.3
 }
@@ -37,18 +34,32 @@ Configuration values such as prices, A4 format dimensions are stored in *config.
 
 ## Usage 🚀
 
+You can run the program in two ways:
+
+### 1. Run from source (using Python)
 1. Download and unpack the program.
+   
+2. Open a terminal in the program folder.
+   
+3. Run:
+   ```bash
+   python main.py
 
-2. Run the program:
+4. Choose any directory by pressing Browse and analyze all the .pdf files inside by pressing Analyze.
 
-```
-python main.py
-```
-3. Choose any directory by pressing '**Browse**' and analyze all the .pdf files inside by pressing '**Analyze**' button
+### 2. Run the prebuilt binary
+
+1. Go to the Releases section of this repository.
+
+2. Download the binary file for your system.
+
+3. Unpack it and run the executable directly (no Python required).
+
+4. Use the Browse and Analyze buttons as above.
 
 ### Example output
 
-<img width="1002" height="332" alt="image" src="https://github.com/user-attachments/assets/11a8599f-033e-4bfe-b5a0-62da6ad14345" />
+<img width="802" height="432" alt="image" src="https://github.com/user-attachments/assets/d46943aa-e5f5-45c0-a5e6-7e285c2a768f" />
 
 ## Requirements
 - Python 3.8+
