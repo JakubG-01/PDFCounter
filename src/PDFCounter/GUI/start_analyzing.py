@@ -51,9 +51,6 @@ class StartAnalyzing(ttk.Frame):
             folder_path=folder,
             price_bw=self.config_data["PRICE_FOR_BW"],
             price_color=self.config_data["PRICE_FOR_COLOR"],
-            pixel_to_mm=self.config_data["PIXEL_TO_MM"],
-            a4_format=self.config_data["A4_WIDTH_MM"] *
-            self.config_data["A4_HEIGHT_MM"]
         )
 
         for filename, bw, color, blank, cost, status in self.analyzer.analyze_all():

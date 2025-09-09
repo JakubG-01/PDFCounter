@@ -4,13 +4,11 @@ from .page_analyzer import PDFPageAnalyzer
 
 class PDFFileAnalyzer:
     def __init__(self, filepath, price_bw,
-                 price_color, pixel_to_mm, a4_format):
+                 price_color):
         self.filepath = filepath
         self.filename = filepath.split("/")[-1]
         self.price_bw = price_bw
         self.price_color = price_color
-        self.pixel_to_mm = pixel_to_mm
-        self.a4_format = a4_format
         self.pages_bw = 0
         self.pages_color = 0
         self.pages_blank = 0
@@ -21,8 +19,7 @@ class PDFFileAnalyzer:
             doc = fitz.open(self.filepath)
             file_cost = 0.0
             for page in doc.pages():
-                analyzer = PDFPageAnalyzer(
-                    page, self.pixel_to_mm, self.a4_format)
+                analyzer = PDFPageAnalyzer(page)
                 format_ratio = analyzer.get_format_ratio()
                 is_color = analyzer.is_color()
                 is_blank = analyzer.is_white_or_empty()

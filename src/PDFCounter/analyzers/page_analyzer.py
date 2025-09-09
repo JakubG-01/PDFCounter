@@ -1,12 +1,17 @@
 from PIL import Image
 import io
 
+A4_WIDTH_MM = 210
+A4_HEIGHT_MM = 297
+A4_FORMAT = A4_HEIGHT_MM * A4_WIDTH_MM
+PIXEL_TO_MM = 0.3528
+
 
 class PDFPageAnalyzer:
-    def __init__(self, page, pixel_to_mm, a4_format):
+    def __init__(self, page):
         self.page = page
-        self.pixel_to_mm = pixel_to_mm
-        self.a4_format = a4_format
+        self.pixel_to_mm = PIXEL_TO_MM
+        self.a4_format = A4_FORMAT
         self.width_pt, self.height_pt = self.page.mediabox_size
         self.width_mm = round(self.width_pt * self.pixel_to_mm)
         self.height_mm = round(self.height_pt * self.pixel_to_mm)

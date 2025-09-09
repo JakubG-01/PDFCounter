@@ -3,13 +3,10 @@ import os
 
 
 class PDFBatchAnalyzer:
-    def __init__(self, folder_path, price_bw,
-                 price_color, pixel_to_mm, a4_format):
+    def __init__(self, folder_path, price_bw, price_color):
         self.folder_path = folder_path
         self.price_bw = price_bw
         self.price_color = price_color
-        self.pixel_to_mm = pixel_to_mm
-        self.a4_format = a4_format
         self.total_bw = 0
         self.total_color = 0
         self.total_blank = 0
@@ -20,8 +17,6 @@ class PDFBatchAnalyzer:
             filepath=filepath,
             price_bw=self.price_bw,
             price_color=self.price_color,
-            pixel_to_mm=self.pixel_to_mm,
-            a4_format=self.a4_format
         )
         ok_msg, error_msg = file_analyzer.analyze()
         bw, color, cost, blank = file_analyzer.get_summary()
