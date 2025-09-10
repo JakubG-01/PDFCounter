@@ -1,3 +1,4 @@
+from math import ceil
 from PIL import Image
 import io
 
@@ -17,7 +18,8 @@ class PDFPageAnalyzer:
         self.height_mm = round(self.height_pt * self.pixel_to_mm)
 
     def get_format_ratio(self):
-        return (self.width_mm * self.height_mm) / self.a4_format
+        rounded_to_half = ceil(((self.width_mm * self.height_mm) / self.a4_format) * 2) / 2
+        return rounded_to_half
 
     def is_color(self):
         pix = self.page.get_pixmap()
