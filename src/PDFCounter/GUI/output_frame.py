@@ -10,7 +10,7 @@ class FileAnalyticsOutput(ttk.Frame):
 
     def create_widgets(self):
         self.results_box = ttk.Treeview(self, columns=(
-            "filename", "bw", "color", "blank", "cost", "status"),
+            "filename", "bw", "color", "blank", "ratio", "cost", "status"),
             show="headings",
             height=8
         )
@@ -19,6 +19,7 @@ class FileAnalyticsOutput(ttk.Frame):
         self.results_box.heading("bw", text="B/W Pages")
         self.results_box.heading("color", text="Color Pages")
         self.results_box.heading("blank", text="Blank Pages")
+        self.results_box.heading("ratio", text="Format Ratio")
         self.results_box.heading("cost", text="Cost (zł)")
         self.results_box.heading("status", text="Status")
 
@@ -26,6 +27,7 @@ class FileAnalyticsOutput(ttk.Frame):
         self.results_box.column("bw", width=30, anchor="center")
         self.results_box.column("color", width=30, anchor="center")
         self.results_box.column("blank", width=30, anchor="center")
+        self.results_box.column("ratio", width=30, anchor="center")
         self.results_box.column("cost", width=30, anchor="center")
         self.results_box.column("status", width=20, anchor="center")
 
