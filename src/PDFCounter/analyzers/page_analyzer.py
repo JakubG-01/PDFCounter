@@ -19,7 +19,7 @@ class PDFPageAnalyzer:
 
     def get_format_ratio(self):
         area_ratio = (self.width_mm * self.height_mm) / self.a4_format
-        if area_ratio % 100 <= 9:
+        if (area_ratio * 100) % 100 <= 9:
             rounded_to_half = floor(area_ratio * 2) / 2
             return rounded_to_half
         else:
