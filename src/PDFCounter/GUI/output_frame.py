@@ -7,6 +7,8 @@ class FileAnalyticsOutput(ttk.Frame):
     def __init__(self, parent):
         super().__init__(parent, padding=10)
         self.pack(side="top", fill="both", expand=True)
+        self.files_list = []
+        self.row_count = 0
 
         self.create_widgets()
 
@@ -56,6 +58,11 @@ class FileAnalyticsOutput(ttk.Frame):
 
     def on_drop(self, event):
         files = self.tk.splitlist(event.data)
+
         for f in files:
             if f.lower().endswith(".pdf"):
-                print(files)
+                self.parent = os.path.basename(os.path.dirname(f))
+                self.name = os.path.basename(f)
+                if f not in self.files_list:
+                    self.files_list.append(f)
+
