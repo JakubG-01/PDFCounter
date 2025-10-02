@@ -31,27 +31,28 @@ class StartAnalyzing(ttk.Frame):
         for item in self.output_frame.results_box.get_children():
             self.output_frame.results_box.delete(item)
 
-        folder = self.file_select_frame.selected_folder
-        if not folder:
-            messagebox.showwarning(
-                "Warning", "Please select a folder before proceeding")
-            return
+        if not self.output_frame.files_list:
+            folder = self.file_select_frame.selected_folder
+            if not folder:
+                messagebox.showwarning(
+                    "Warning", "Please select a folder before proceeding")
+                return
 
-        pdf_files = [f for f in os.listdir(
-            folder) if f.lower().endswith(".pdf")]
-        amount_of_files = len(pdf_files)
-        if amount_of_files == 0:
-            messagebox.showwarning(
-                "Warning", "No PDF files found in this folder")
-            return
+            pdf_files = [f for f in os.listdir(
+                folder) if f.lower().endswith(".pdf")]
+            amount_of_files = len(pdf_files)
+            if amount_of_files == 0:
+                messagebox.showwarning(
+                    "Warning", "No PDF files found in this folder")
+                return
 
-        progress_step = 100 / amount_of_files
+            progress_step = 100 / amount_of_files
 
-        self.analyzer = PDFBatchAnalyzer(
-            folder_path=folder,
-            price_bw=self.config_data["PRICE_FOR_BW"],
-            price_color=self.config_data["PRICE_FOR_COLOR"],
-        )
+            self.analyzer = PDFBatchAnalyzer(
+                folder_path=folder,
+                price_bw=self.config_data["PRICE_FOR_BW"],
+                price_color=self.config_data["PRICE_FOR_COLOR"],
+            )
 
         for filename, bw, color, blank, ratio, cost, status in self.analyzer.analyze_all():
             if filename == "TOTAL":
