@@ -57,5 +57,5 @@ class FileAnalyticsOutput(ttk.Frame):
     def on_drop(self, event):
         files = self.tk.splitlist(event.data)
         for f in files:
-            # if f.lower().endswith(".pdf"):
-            print(files)
+            if f.lower().endswith(".pdf"):
+                print(files)
