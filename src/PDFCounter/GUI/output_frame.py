@@ -1,4 +1,6 @@
 from tkinter import ttk
+from tkinterdnd2 import DND_FILES
+import os
 
 
 class FileAnalyticsOutput(ttk.Frame):
@@ -48,3 +50,12 @@ class FileAnalyticsOutput(ttk.Frame):
         style = ttk.Style(self.results_box)
         style.configure("Treeview.Heading", foreground="black",
                         font=("TkDefaultFont", 10, "bold"))
+
+        self.drop_target_register(DND_FILES)
+        self.dnd_bind("<<Drop>>", self.on_drop)
+
+    def on_drop(self, event):
+        files = self.tk.splitlist(event.data)
+        for f in files:
+            # if f.lower().endswith(".pdf"):
+            print(files)
