@@ -65,4 +65,15 @@ class FileAnalyticsOutput(ttk.Frame):
                 self.name = os.path.basename(f)
                 if f not in self.files_list:
                     self.files_list.append(f)
+                    self.add_records()
 
+    def add_records(self):
+        row_tag = "even" if self.row_count % 2 == 0 else "odd"
+        self.results_box.insert("", "end",
+                                values=(os.path.join(self.parent, self.name), "", "",
+                                        "", "", "", ""),
+                                tags=(row_tag,)
+                                )
+        self.results_box.tag_configure("odd", background="white")
+        self.results_box.tag_configure("even", background="lightgreen")
+        self.row_count += 1
