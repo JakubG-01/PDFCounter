@@ -6,7 +6,6 @@ class PDFFileAnalyzer:
     def __init__(self, filepath, price_bw,
                  price_color):
         self.filepath = filepath
-        self.filename = filepath.split("/")[-1]
         self.price_bw = price_bw
         self.price_color = price_color
         self.pages_bw = 0
