@@ -1,14 +1,14 @@
-import os
-import tkinter as tk
-from tkinter import PhotoImage
-from .file_select import FileSelect
-from .output_frame import FileAnalyticsOutput
 from .start_analyzing import StartAnalyzing
+from .output_frame import FileAnalyticsOutput
+from .file_select import FileSelect
+from tkinter import PhotoImage
+import os
+from tkinterdnd2 import DND_FILES, TkinterDnD
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
-class PDFCounterApp(tk.Tk):
+class PDFCounterApp(TkinterDnD.Tk):
     def __init__(self, config):
         super().__init__()
         self.config_data = config
