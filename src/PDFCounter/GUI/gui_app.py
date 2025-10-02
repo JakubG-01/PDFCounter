@@ -3,7 +3,7 @@ from .output_frame import FileAnalyticsOutput
 from .file_select import FileSelect
 from tkinter import PhotoImage
 import os
-from tkinterdnd2 import DND_FILES, TkinterDnD
+from tkinterdnd2 import TkinterDnD
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
