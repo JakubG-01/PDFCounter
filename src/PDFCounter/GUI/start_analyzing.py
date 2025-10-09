@@ -25,11 +25,26 @@ class StartAnalyzing(ttk.Frame):
         )
         analyze_button.pack(side="left")
 
+    def clearTree(self):
+        for item in self.output_frame.results_box.get_children():
+            self.output_frame.results_box.delete(item)
+
+    def colorRows(self):
+        self.output_frame.results_box.tag_configure(
+            "total", background="#e0e0e0", font=("TkDefaultFont", 10, "bold"))
+        self.output_frame.results_box.tag_configure(
+            "error", foreground="red"
+        )
+        self.output_frame.results_box.tag_configure(
+            "odd", background="white")
+        self.output_frame.results_box.tag_configure(
+            "even", background="#cce6ff")
+
     def changeProgress(self):
         row_count = 0
         self.progress_bar['value'] = 0
-        for item in self.output_frame.results_box.get_children():
-            self.output_frame.results_box.delete(item)
+
+        self.clearTree()
 
         if not self.output_frame.files_list:
             folder = self.file_select_frame.selected_folder
@@ -56,12 +71,16 @@ class StartAnalyzing(ttk.Frame):
 
         for filename, bw, color, blank, ratio, cost, status in self.analyzer.analyze_all():
             if filename == "TOTAL":
-                self.output_frame.results_box.insert(
-                    "", "end",
-                    values=("TOTAL", self.analyzer.total_bw, self.analyzer.total_color,
-                            self.analyzer.total_blank, self.analyzer.total_format_ratios, f"{self.analyzer.total_cost:.2f}", status),
-                    tags=("total",)
-                )
+                self.output_frame.results_box.insert("", "end",
+                                                     values=("TOTAL",
+                                                             self.analyzer.total_bw,
+                                                             self.analyzer.total_color,
+                                                             self.analyzer.total_blank,
+                                                             self.analyzer.total_format_ratios,
+                                                             f"{self.analyzer.total_cost:.2f}",
+                                                             status),
+                                                     tags=("total",)
+                                                     )
                 self.update_idletasks()
             elif status != "OK":
                 self.output_frame.results_box.insert(
@@ -74,21 +93,20 @@ class StartAnalyzing(ttk.Frame):
                 row_tag = "even" if row_count % 2 == 0 else "odd"
                 self.output_frame.results_box.insert("", "end",
                                                      values=(
-                                                         filename, bw, color, blank, ratio, f"{cost:.2f}", status),
+                                                         filename,
+                                                         bw,
+                                                         color,
+                                                         blank,
+                                                         ratio,
+                                                         f"{cost:.2f}",
+                                                         status),
                                                      tags=(row_tag,))
                 self.progress_bar['value'] += progress_step
-                self.output_frame.results_box.tag_configure(
-                    "odd", background="white")
-                self.output_frame.results_box.tag_configure(
-                    "even", background="#cce6ff")
+
                 self.update_idletasks()
                 row_count += 1
 
-        self.output_frame.results_box.tag_configure(
-            "total", background="#e0e0e0", font=("TkDefaultFont", 10, "bold"))
-        self.output_frame.results_box.tag_configure(
-            "error", foreground="red"
-        )
+        self.colorRows()
 
         messagebox.showinfo(
             "Analysis completed", "Analysis of selected files has been completed successfully"
