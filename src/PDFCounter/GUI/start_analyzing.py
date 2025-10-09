@@ -40,6 +40,21 @@ class StartAnalyzing(ttk.Frame):
         self.output_frame.results_box.tag_configure(
             "even", background="#cce6ff")
 
+    def msgWarningNoFolder(self):
+        messagebox.showwarning(
+            "Warning", "Please select a folder before proceeding")
+        return
+
+    def msgWarningNoPDF(self):
+        messagebox.showwarning(
+            "Warning", "No PDF files found in this folder")
+        return
+
+    def msgSuccess(self):
+        messagebox.showinfo(
+            "Analysis completed", "Analysis of selected files has been completed successfully"
+        )
+
     def changeProgress(self):
         row_count = 0
         self.progress_bar['value'] = 0
@@ -49,17 +64,13 @@ class StartAnalyzing(ttk.Frame):
         if not self.output_frame.files_list:
             folder = self.file_select_frame.selected_folder
             if not folder:
-                messagebox.showwarning(
-                    "Warning", "Please select a folder before proceeding")
-                return
+                self.msgWarningNoFolder()
 
             pdf_files = [f for f in os.listdir(
                 folder) if f.lower().endswith(".pdf")]
             amount_of_files = len(pdf_files)
             if amount_of_files == 0:
-                messagebox.showwarning(
-                    "Warning", "No PDF files found in this folder")
-                return
+                self.msgWarningNoPDF()
 
             progress_step = 100 / amount_of_files
 
@@ -107,7 +118,4 @@ class StartAnalyzing(ttk.Frame):
                 row_count += 1
 
         self.colorRows()
-
-        messagebox.showinfo(
-            "Analysis completed", "Analysis of selected files has been completed successfully"
-        )
+        self.msgSuccess()
