@@ -57,6 +57,8 @@ class FileAnalyticsOutput(ttk.Frame):
         self.dnd_bind("<<Drop>>", self.on_drop)
 
     def on_drop(self, event):
+        if not self.files_list:
+            self.clearTree()
         files = self.tk.splitlist(event.data)
 
         for f in files:
@@ -77,3 +79,7 @@ class FileAnalyticsOutput(ttk.Frame):
         self.results_box.tag_configure("odd", background="white")
         self.results_box.tag_configure("even", background="lightgreen")
         self.row_count += 1
+
+    def clearTree(self):
+        for item in self.results_box.get_children():
+            self.results_box.delete(item)
