@@ -49,6 +49,8 @@ class PDFBatchAnalyzer:
 
                 yield (filename, bw, color, blank, ratio, cost, status)
 
+        yield ("TOTAL", self.total_bw, self.total_color, self.total_blank, self.total_format_ratios, self.total_cost, "COMPLETED")
+
     def analyze_list(self):
         for filename in (self.files_list):
             filename, bw, color, blank, ratio, cost, status = self.analyze_file(
