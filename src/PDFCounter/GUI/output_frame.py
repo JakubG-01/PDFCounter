@@ -77,7 +77,7 @@ class FileAnalyticsOutput(ttk.Frame):
                                 tags=(row_tag,)
                                 )
         self.results_box.tag_configure("odd", background="white")
-        self.results_box.tag_configure("even", background="lightgreen")
+        self.results_box.tag_configure("even", background="#cce6ff")
         self.row_count += 1
 
     def clearTree(self):
