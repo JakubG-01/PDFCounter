@@ -72,8 +72,8 @@ class FileAnalyticsOutput(ttk.Frame):
     def add_records(self):
         row_tag = "even" if self.row_count % 2 == 0 else "odd"
         self.results_box.insert("", "end",
-                                values=(os.path.join(self.parent, self.name), "", "",
-                                        "", "", "", ""),
+                                values=(os.path.join(self.parent, self.name), "-", "-",
+                                        "-", "-", "-", "PENDING"),
                                 tags=(row_tag,)
                                 )
         self.results_box.tag_configure("odd", background="white")
