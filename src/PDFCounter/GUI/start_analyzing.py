@@ -118,6 +118,7 @@ class StartAnalyzing(ttk.Frame):
                     self.update_idletasks()
                     row_count += 1
                 self.colorRows()
+            self.file_select_frame.selected_folder = ""
 
         else:
             amount_of_files = len(self.output_frame.files_list)
@@ -170,5 +171,5 @@ class StartAnalyzing(ttk.Frame):
                     self.update_idletasks()
                     row_count += 1
                 self.colorRows()
-
+            self.output_frame.files_list.clear()
         self.msgSuccess()
