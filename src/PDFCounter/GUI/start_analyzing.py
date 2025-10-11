@@ -40,9 +40,9 @@ class StartAnalyzing(ttk.Frame):
         self.output_frame.results_box.tag_configure(
             "even", background="#cce6ff")
 
-    def msgWarningNoFolder(self):
+    def msgWarningNoFolderOrNoFiles(self):
         messagebox.showwarning(
-            "Warning", "Please select a folder before proceeding")
+            "Warning", "Please select a folder or drag and drop files before proceeding")
         return
 
     def msgWarningNoPDF(self):
@@ -58,14 +58,13 @@ class StartAnalyzing(ttk.Frame):
     def changeProgress(self):
         row_count = 0
         self.progress_bar['value'] = 0
-
         self.clearTree()
+
+        if not self.output_frame.files_list and not self.file_select_frame.selected_folder:
+            self.msgWarningNoFolderOrNoFiles()
 
         if not self.output_frame.files_list:
             folder = self.file_select_frame.selected_folder
-            if not folder:
-                self.msgWarningNoFolder()
-
             pdf_files = [f for f in os.listdir(
                 folder) if f.lower().endswith(".pdf")]
             amount_of_files = len(pdf_files)
@@ -121,6 +120,7 @@ class StartAnalyzing(ttk.Frame):
             self.file_select_frame.selected_folder = ""
 
         else:
+
             amount_of_files = len(self.output_frame.files_list)
             if amount_of_files == 0:
                 self.msgWarningNoPDF()
@@ -173,3 +173,4 @@ class StartAnalyzing(ttk.Frame):
                 self.colorRows()
             self.output_frame.files_list.clear()
         self.msgSuccess()
+        row_count = 0
