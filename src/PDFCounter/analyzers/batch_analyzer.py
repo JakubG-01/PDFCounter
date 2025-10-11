@@ -52,9 +52,12 @@ class PDFBatchAnalyzer:
         yield ("TOTAL", self.total_bw, self.total_color, self.total_blank, self.total_format_ratios, self.total_cost, "COMPLETED")
 
     def analyze_list(self):
-        for filename in (self.files_list):
+        for filepath in (self.files_list):
+            foldername = filepath.split("/")[-2]
+            filename = filepath.split("/")[-1]
+            display_name = foldername + "\\" + filename
             filename, bw, color, blank, ratio, cost, status = self.analyze_file(
-                filename)
+                filepath)
             if status == "OK":
                 if bw is not None:
                     self.total_bw += bw
@@ -67,6 +70,6 @@ class PDFBatchAnalyzer:
                 if cost is not None:
                     self.total_cost += cost
 
-            yield (filename, bw, color, blank, ratio, cost, status)
+            yield (display_name, bw, color, blank, ratio, cost, status)
 
         yield ("TOTAL", self.total_bw, self.total_color, self.total_blank, self.total_format_ratios, self.total_cost, "COMPLETED")
