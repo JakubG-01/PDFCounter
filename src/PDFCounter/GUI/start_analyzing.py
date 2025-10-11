@@ -25,6 +25,11 @@ class StartAnalyzing(ttk.Frame):
         )
         analyze_button.pack(side="left")
 
+        analyze_button = ttk.Button(
+            self, text="Clear", command=self.clearAll
+        )
+        analyze_button.pack(side="left")
+
     def clearTree(self):
         for item in self.output_frame.results_box.get_children():
             self.output_frame.results_box.delete(item)
@@ -63,114 +68,123 @@ class StartAnalyzing(ttk.Frame):
         if not self.output_frame.files_list and not self.file_select_frame.selected_folder:
             self.msgWarningNoFolderOrNoFiles()
 
-        if not self.output_frame.files_list:
-            folder = self.file_select_frame.selected_folder
-            pdf_files = [f for f in os.listdir(
-                folder) if f.lower().endswith(".pdf")]
-            amount_of_files = len(pdf_files)
-            if amount_of_files == 0:
-                self.msgWarningNoPDF()
-
-            progress_step = 100 / amount_of_files
-
-            self.analyzer = PDFBatchAnalyzer(
-                folder_path=folder,
-                price_bw=self.config_data["PRICE_FOR_BW"],
-                price_color=self.config_data["PRICE_FOR_COLOR"],
-                files_list=None
-            )
-
-            for filename, bw, color, blank, ratio, cost, status in self.analyzer.analyze_folder():
-                if filename == "TOTAL":
-                    self.output_frame.results_box.insert("", "end",
-                                                         values=("TOTAL",
-                                                                 self.analyzer.total_bw,
-                                                                 self.analyzer.total_color,
-                                                                 self.analyzer.total_blank,
-                                                                 self.analyzer.total_format_ratios,
-                                                                 f"{self.analyzer.total_cost:.2f}",
-                                                                 status),
-                                                         tags=("total",)
-                                                         )
-                    self.update_idletasks()
-                elif status != "OK":
-                    self.output_frame.results_box.insert(
-                        "", "end",
-                        values=(filename, "", "", "", "", "", status),
-                        tags=("error",)
-                    )
-
-                else:
-                    row_tag = "even" if row_count % 2 == 0 else "odd"
-                    self.output_frame.results_box.insert("", "end",
-                                                         values=(
-                                                             filename,
-                                                             bw,
-                                                             color,
-                                                             blank,
-                                                             ratio,
-                                                             f"{cost:.2f}",
-                                                             status),
-                                                         tags=(row_tag,))
-                    self.progress_bar['value'] += progress_step
-
-                    self.update_idletasks()
-                    row_count += 1
-                self.colorRows()
-            self.file_select_frame.selected_folder = ""
-
         else:
+            if not self.output_frame.files_list:
+                folder = self.file_select_frame.selected_folder
+                pdf_files = [f for f in os.listdir(
+                    folder) if f.lower().endswith(".pdf")]
+                amount_of_files = len(pdf_files)
+                if amount_of_files == 0:
+                    self.msgWarningNoPDF()
 
-            amount_of_files = len(self.output_frame.files_list)
-            if amount_of_files == 0:
-                self.msgWarningNoPDF()
+                progress_step = 100 / amount_of_files
 
-            progress_step = 100 / amount_of_files
+                self.analyzer = PDFBatchAnalyzer(
+                    folder_path=folder,
+                    price_bw=self.config_data["PRICE_FOR_BW"],
+                    price_color=self.config_data["PRICE_FOR_COLOR"],
+                    files_list=None
+                )
 
-            self.analyzer = PDFBatchAnalyzer(
-                folder_path=None,
-                price_bw=self.config_data["PRICE_FOR_BW"],
-                price_color=self.config_data["PRICE_FOR_COLOR"],
-                files_list=self.output_frame.files_list
-            )
+                for filename, bw, color, blank, ratio, cost, status in self.analyzer.analyze_folder():
+                    if filename == "TOTAL":
+                        self.output_frame.results_box.insert("", "end",
+                                                             values=("TOTAL",
+                                                                     self.analyzer.total_bw,
+                                                                     self.analyzer.total_color,
+                                                                     self.analyzer.total_blank,
+                                                                     self.analyzer.total_format_ratios,
+                                                                     f"{self.analyzer.total_cost:.2f}",
+                                                                     status),
+                                                             tags=("total",)
+                                                             )
+                        self.update_idletasks()
+                    elif status != "OK":
+                        self.output_frame.results_box.insert(
+                            "", "end",
+                            values=(filename, "", "", "", "", "", status),
+                            tags=("error",)
+                        )
 
-            for filename, bw, color, blank, ratio, cost, status in self.analyzer.analyze_list():
-                if filename == "TOTAL":
-                    self.output_frame.results_box.insert("", "end",
-                                                         values=("TOTAL",
-                                                                 self.analyzer.total_bw,
-                                                                 self.analyzer.total_color,
-                                                                 self.analyzer.total_blank,
-                                                                 self.analyzer.total_format_ratios,
-                                                                 f"{self.analyzer.total_cost:.2f}",
+                    else:
+                        row_tag = "even" if row_count % 2 == 0 else "odd"
+                        self.output_frame.results_box.insert("", "end",
+                                                             values=(
+                                                                 filename,
+                                                                 bw,
+                                                                 color,
+                                                                 blank,
+                                                                 ratio,
+                                                                 f"{cost:.2f}",
                                                                  status),
-                                                         tags=("total",)
-                                                         )
-                    self.update_idletasks()
-                elif status != "OK":
-                    self.output_frame.results_box.insert(
-                        "", "end",
-                        values=(filename, "", "", "", "", "", status),
-                        tags=("error",)
-                    )
+                                                             tags=(row_tag,))
+                        self.progress_bar['value'] += progress_step
 
-                else:
-                    row_tag = "even" if row_count % 2 == 0 else "odd"
-                    self.output_frame.results_box.insert("", "end",
-                                                         values=(
-                                                             filename,
-                                                             bw,
-                                                             color,
-                                                             blank,
-                                                             ratio,
-                                                             f"{cost:.2f}",
-                                                             status),
-                                                         tags=(row_tag,))
-                    self.progress_bar['value'] += progress_step
+                        self.update_idletasks()
+                        row_count += 1
+                    self.colorRows()
+                self.file_select_frame.selected_folder = ""
 
-                    self.update_idletasks()
-                    row_count += 1
-                self.colorRows()
-            self.output_frame.files_list.clear()
-        self.msgSuccess()
-        row_count = 0
+            else:
+
+                amount_of_files = len(self.output_frame.files_list)
+                if amount_of_files == 0:
+                    self.msgWarningNoPDF()
+
+                progress_step = 100 / amount_of_files
+
+                self.analyzer = PDFBatchAnalyzer(
+                    folder_path=None,
+                    price_bw=self.config_data["PRICE_FOR_BW"],
+                    price_color=self.config_data["PRICE_FOR_COLOR"],
+                    files_list=self.output_frame.files_list
+                )
+
+                for filename, bw, color, blank, ratio, cost, status in self.analyzer.analyze_list():
+                    if filename == "TOTAL":
+                        self.output_frame.results_box.insert("", "end",
+                                                             values=("TOTAL",
+                                                                     self.analyzer.total_bw,
+                                                                     self.analyzer.total_color,
+                                                                     self.analyzer.total_blank,
+                                                                     self.analyzer.total_format_ratios,
+                                                                     f"{self.analyzer.total_cost:.2f}",
+                                                                     status),
+                                                             tags=("total",)
+                                                             )
+                        self.update_idletasks()
+                    elif status != "OK":
+                        self.output_frame.results_box.insert(
+                            "", "end",
+                            values=(filename, "", "", "", "", "", status),
+                            tags=("error",)
+                        )
+
+                    else:
+                        row_tag = "even" if row_count % 2 == 0 else "odd"
+                        self.output_frame.results_box.insert("", "end",
+                                                             values=(
+                                                                 filename,
+                                                                 bw,
+                                                                 color,
+                                                                 blank,
+                                                                 ratio,
+                                                                 f"{cost:.2f}",
+                                                                 status),
+                                                             tags=(row_tag,))
+                        self.progress_bar['value'] += progress_step
+
+                        self.update_idletasks()
+                        row_count += 1
+                    self.colorRows()
+                self.output_frame.files_list.clear()
+            self.msgSuccess()
+            row_count = 0
+
+    def clearAll(self):
+        self.clearTree()
+        self.progress_bar['value'] = 0
+        self.output_frame.files_list.clear()
+        self.file_select_frame.selected_folder = ""
+        self.file_select_frame.chosen_directory.config(
+            text="Folder was not selected")
