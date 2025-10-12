@@ -28,7 +28,7 @@ class StartAnalyzing(ttk.Frame):
         analyze_button = ttk.Button(
             self, text="Clear", command=self.clearAll
         )
-        analyze_button.pack(side="left")
+        analyze_button.pack(side="right")
 
     def clearTree(self):
         for item in self.output_frame.results_box.get_children():
