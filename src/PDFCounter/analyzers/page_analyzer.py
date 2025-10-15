@@ -5,7 +5,7 @@ import io
 A4_WIDTH_MM = 210
 A4_HEIGHT_MM = 297
 A4_FORMAT = A4_HEIGHT_MM * A4_WIDTH_MM
-PIXEL_TO_MM = 0.3528
+PIXEL_TO_MM = 0.352778
 
 
 class PDFPageAnalyzer:
@@ -13,7 +13,11 @@ class PDFPageAnalyzer:
         self.page = page
         self.pixel_to_mm = PIXEL_TO_MM
         self.a4_format = A4_FORMAT
-        self.width_pt, self.height_pt = self.page.mediabox_size
+
+        mediabox = self.page.mediabox
+        self.width_pt = mediabox.x1 - mediabox.x0
+        self.height_pt = mediabox.y1 - mediabox.y0
+
         self.width_mm = round(self.width_pt * self.pixel_to_mm)
         self.height_mm = round(self.height_pt * self.pixel_to_mm)
 
