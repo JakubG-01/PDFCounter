@@ -5,7 +5,7 @@ import io
 A4_WIDTH_MM = 210
 A4_HEIGHT_MM = 297
 A4_FORMAT = A4_HEIGHT_MM * A4_WIDTH_MM
-PIXEL_TO_MM = 0.352778
+PIXEL_TO_MM = 25.4 / 72
 
 
 class PDFPageAnalyzer:
